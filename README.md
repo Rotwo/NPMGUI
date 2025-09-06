@@ -10,10 +10,9 @@ This solution is modular and organized into multiple projects:
 
 | Folder             | Description                                                                |
 |--------------------|----------------------------------------------------------------------------|
-| `NPMGUI`           | Root folder containing the main solution file (`.sln`)                     |
+| `NPMGUI`           | Root folder containing the main solution file & avalonia project (`.sln`)  |
 | `NPMGUI.Core`      | Core logic for dependency handling, resolution, and project interactions   |
 | `NPMGUI.Desktop`   | Avalonia-based desktop UI for Windows, macOS, and Linux                    |
-| `NPMGUI.Console`   | Console interface for headless or script-based usage                       |
 
 ---
 
