@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:NPMGUI.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NPMGUI.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+	<Grid Background="{DynamicResource PrimaryBackground}" ColumnDefinitions="200, *">
+		<Border Grid.Column="0" Padding="20" Background="{DynamicResource SidebarBackground}">
+			<Grid RowDefinitions="*, auto">
+				<StackPanel Grid.Row="0">
+					<Button HorizontalAlignment="Stretch">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Classes="icon" Content="&#xE390;" VerticalAlignment="Center"></Label>
+							<Label>Packages</Label>
+						</StackPanel>
+					</Button>
+				</StackPanel>
+
+				<Button Classes="transparent" Grid.Row="1">
+					<Label Classes="icon" Content="&#xE272;"></Label>
+				</Button>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

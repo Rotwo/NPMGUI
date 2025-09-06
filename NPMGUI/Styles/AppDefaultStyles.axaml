@@ -1,0 +1,31 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+      <!-- Add Controls for Previewer Here -->
+    </Border>
+  </Design.PreviewWith>
+
+	<!-- Add Styles Here -->
+	<Style Selector="Label.icon">
+		<Setter Property="FontFamily" Value="{DynamicResource PhosphorFill}"></Setter>
+	</Style>
+
+	<Style Selector="Button">
+		<Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}"></Setter>
+		<Setter Property="Background" Value="{DynamicResource PrimaryBackground}"></Setter>
+	</Style>
+
+	<Style Selector="Button:pointerover /template/ ContentPresenter">
+		<Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundHover}"></Setter>
+		<Setter Property="Background" Value="{DynamicResource PrimaryBackground}"></Setter>
+	</Style>
+
+	<Style Selector="Button.transparent">
+		<Setter Property="Background" Value="Transparent"></Setter>
+	</Style>
+
+	<Style Selector="Button.transparent /template/ ContentPresenter">
+		<Setter Property="Background" Value="Transparent"></Setter>
+	</Style>
+</Styles>

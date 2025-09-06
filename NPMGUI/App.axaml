@@ -1,0 +1,22 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="NPMGUI.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+
+		<StyleInclude Source="Styles/AppDefaultStyles.axaml"></StyleInclude>
+    </Application.Styles>
+
+	<Application.Resources>
+		<SolidColorBrush x:Key="PrimaryBackground">#1C1C1C</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryForeground">#EEF0F2</SolidColorBrush>
+		<SolidColorBrush x:Key="SidebarBackground">#282828</SolidColorBrush>
+
+		<SolidColorBrush x:Key="PrimaryForegroundHover">#FAFAFF</SolidColorBrush>
+
+		<FontFamily x:Key="PhosphorFill">/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+	</Application.Resources>
+</Application>
