@@ -35,7 +35,7 @@ Project development is tracked using a GitHub Projects Kanban Board.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/NPMGUI.git
+   git clone https://github.com/Rotwo/NPMGUI.git
    cd NPMGUI
    ```
 
