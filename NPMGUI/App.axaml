@@ -11,12 +11,65 @@
     </Application.Styles>
 
 	<Application.Resources>
+		<!-- Core Backgrounds -->
 		<SolidColorBrush x:Key="PrimaryBackground">#1C1C1C</SolidColorBrush>
-		<SolidColorBrush x:Key="PrimaryForeground">#EEF0F2</SolidColorBrush>
+		<!-- Main background -->
+		<SolidColorBrush x:Key="SecondaryBackground">#232323</SolidColorBrush>
+		<!-- Panels, cards -->
 		<SolidColorBrush x:Key="SidebarBackground">#282828</SolidColorBrush>
+		<!-- Sidebar -->
+		<SolidColorBrush x:Key="OverlayBackground">#2E2E2E</SolidColorBrush>
+		<!-- Dialogs, popups -->
 
+		<!-- Foregrounds -->
+		<SolidColorBrush x:Key="PrimaryForeground">#EEF0F2</SolidColorBrush>
+		<!-- Default text -->
+		<SolidColorBrush x:Key="SecondaryForeground">#DADDD8</SolidColorBrush>
+		<!-- Muted text -->
+		<SolidColorBrush x:Key="DisabledForeground">#7A7A7A</SolidColorBrush>
+		<!-- Disabled text -->
 		<SolidColorBrush x:Key="PrimaryForegroundHover">#FAFAFF</SolidColorBrush>
+		<!-- Hover text -->
+		<SolidColorBrush x:Key="InverseForeground">#1C1C1C</SolidColorBrush>
+		<!-- On light surfaces -->
 
+		<!-- Accents -->
+		<SolidColorBrush x:Key="Accent">#ECEBE4</SolidColorBrush>
+		<!-- Main accent -->
+		<SolidColorBrush x:Key="AccentHover">#FAFAFF</SolidColorBrush>
+		<SolidColorBrush x:Key="AccentPressed">#DADDD8</SolidColorBrush>
+
+		<!-- Borders -->
+		<SolidColorBrush x:Key="BorderLight">#3A3A3A</SolidColorBrush>
+		<SolidColorBrush x:Key="BorderDark">#121212</SolidColorBrush>
+
+		<!-- Buttons -->
+		<SolidColorBrush x:Key="ButtonBackground">#2E2E2E</SolidColorBrush>
+		<SolidColorBrush x:Key="ButtonBackgroundHover">#383838</SolidColorBrush>
+		<SolidColorBrush x:Key="ButtonBackgroundPressed">#464646</SolidColorBrush>
+		<SolidColorBrush x:Key="ButtonForeground">#EEF0F2</SolidColorBrush>
+
+		<!-- Inputs -->
+		<SolidColorBrush x:Key="InputBackground">#232323</SolidColorBrush>
+		<SolidColorBrush x:Key="InputForeground">#EEF0F2</SolidColorBrush>
+		<SolidColorBrush x:Key="InputPlaceholder">#A0A0A0</SolidColorBrush>
+		<SolidColorBrush x:Key="InputBorder">#3A3A3A</SolidColorBrush>
+		<SolidColorBrush x:Key="InputBorderFocused">#ECEBE4</SolidColorBrush>
+
+		<!-- States -->
+		<SolidColorBrush x:Key="Success">#4CAF50</SolidColorBrush>
+		<SolidColorBrush x:Key="Warning">#FFC107</SolidColorBrush>
+		<SolidColorBrush x:Key="Error">#F44336</SolidColorBrush>
+		<SolidColorBrush x:Key="Info">#2196F3</SolidColorBrush>
+
+		<!-- Sidebar Specific -->
+		<SolidColorBrush x:Key="SidebarItemBackground">Transparent</SolidColorBrush>
+		<SolidColorBrush x:Key="SidebarItemBackgroundHover">#333333</SolidColorBrush>
+		<SolidColorBrush x:Key="SidebarItemBackgroundActive">#3E3E3E</SolidColorBrush>
+		<SolidColorBrush x:Key="SidebarItemForeground">#EEF0F2</SolidColorBrush>
+		<SolidColorBrush x:Key="SidebarItemForegroundMuted">#DADDD8</SolidColorBrush>
+
+		<!-- Fonts -->
 		<FontFamily x:Key="PhosphorFill">/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
 		<FontFamily x:Key="Phosphor">/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
 	</Application.Resources>

@@ -32,4 +32,13 @@
 	<Style Selector="Button.transparent /template/ ContentPresenter">
 		<Setter Property="Background" Value="Transparent"></Setter>
 	</Style>
+
+	<Style Selector="Button.sidebar">
+		<Setter Property="Foreground" Value="{DynamicResource SidebarItemForeground}"></Setter>
+		<Setter Property="Background" Value="{DynamicResource SidebarItemBackground}"></Setter>
+	</Style>
+
+	<Style Selector="Button.sidebar:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource SidebarItemBackgroundHover}"></Setter>
+	</Style>
 </Styles>
