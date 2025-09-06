@@ -27,7 +27,7 @@ This solution is modular and organized into multiple projects:
 ## 📋 Development Tasks
 
 Project development is tracked using a GitHub Projects Kanban Board.
-👉 [View the NPMGUI Development Board]("https://github.com/users/Rotwo/projects/5/views/1")
+👉 [View the NPMGUI Development Board](https://github.com/users/Rotwo/projects/5/views/1)
 
 ---
 
