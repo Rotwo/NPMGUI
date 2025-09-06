@@ -8,7 +8,11 @@
 
 	<!-- Add Styles Here -->
 	<Style Selector="Label.icon">
-		<Setter Property="FontFamily" Value="{DynamicResource PhosphorFill}"></Setter>
+		<Setter Property="FontFamily" Value="{DynamicResource Phosphor}"></Setter>
+	</Style>
+
+	<Style Selector="Label.icon_fill">
+		<Setter Property="FontFamily" Value="{DynamicResource PhosphorFill}" />
 	</Style>
 
 	<Style Selector="Button">
