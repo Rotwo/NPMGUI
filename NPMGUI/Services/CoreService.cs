@@ -1,16 +1,17 @@
 ﻿using NPMGUI.Core;
+using NPMGUI.Interfaces;
 
 namespace NPMGUI.Helpers
 {
-    internal class CoreInstance
+    internal class CoreService : ICoreService
     {
-        public static CoreInstance _instance;
+        public static CoreService _instance;
         private static readonly object _lock = new object();
 
 
         public NPMGUICore? core;
 
-        public static CoreInstance Instance
+        public static CoreService Instance
         {
             get
             {
@@ -18,20 +19,11 @@ namespace NPMGUI.Helpers
                 {
                     if (_instance == null)
                     {
-                        _instance = new CoreInstance();
+                        _instance = new CoreService();
                     }
                     return _instance;
                 }
             }
-        }
-
-        public void SetupCore(string? workDir = null)
-        {
-            if(core == null)
-                core = new NPMGUICore(pm: null);
-
-            core.Setup(workDir: workDir);
-            core.Configure();
         }
     }
 }

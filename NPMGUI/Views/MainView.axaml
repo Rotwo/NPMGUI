@@ -3,34 +3,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:NPMGUI.ViewModels"
+             xmlns:views="clr-namespace:NPMGUI.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NPMGUI.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:MainViewModel"
+             >
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-	<Grid Background="{DynamicResource PrimaryBackground}" ColumnDefinitions="200, *">
+	<Grid Background="{DynamicResource PrimaryBackground}" ColumnDefinitions="auto, *">
+		<ContentControl Grid.Column="1" Content="{Binding CurrentPage}"></ContentControl>
+		
 		<Border Grid.Column="0" Padding="20" Background="{DynamicResource SidebarBackground}">
 			<Grid RowDefinitions="*, auto">
 				<StackPanel Grid.Row="0" Spacing="4">
-					<Image Source="/Assets/Images/Logo.png" Width="175" Margin="0 0 0 10"></Image>
+					<Image Source="/Assets/Images/Logo.png" Width="160" Margin="0 0 0 10"></Image>
 					
-					<Button Classes="sidebar" HorizontalAlignment="Stretch">
+					<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToPackagesCommand}">
 						<StackPanel Orientation="Horizontal">
 							<Label Classes="icon_fill" Content="&#xE390;" VerticalAlignment="Center"></Label>
 							<Label>Packages</Label>
 						</StackPanel>
 					</Button>
-					<Button Classes="sidebar" HorizontalAlignment="Stretch">
+					<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToSearchCommand}">
 						<StackPanel Orientation="Horizontal">
 							<Label Classes="icon_fill" Content="&#xE30C;" VerticalAlignment="Center"></Label>
 							<Label>Search</Label>
 						</StackPanel>
 					</Button>
-					<Button Classes="sidebar" HorizontalAlignment="Stretch">
+					<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToScriptsCommand}">
 						<StackPanel Orientation="Horizontal">
 							<Label Classes="icon" Content="&#xE1BE;" VerticalAlignment="Center"></Label>
 							<Label>Scripts</Label>
