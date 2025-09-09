@@ -3,63 +3,29 @@ using NPMGUI.Core.Helpers;
 using NPMGUI.Core.Models;
 using System.Diagnostics;
 using System.IO;
+using NPMGUI.Core.Setup;
 
 namespace NPMGUI.Core
 {
-    public class NPMGUICore(PackageManager? pm)
+    public class NPMGUICore
     {
-        private PackageManager _pm = pm ?? PackageManager.None;
-        private string? _workPath = null;
-        private readonly PackageHelper _helper = new();
+        private string? _workDir;
 
-        public StatusCode Setup(string? workDir)
+        public bool IsReady => IsValidWorkDir(_workDir);
+
+        public NPMGUICore(string? workDir)
         {
-            var checkDir = workDir ?? Environment.CurrentDirectory;
-            var validPath = CheckValidPath(checkDir);
-            if(!validPath)
+            if (!IsValidWorkDir(workDir))
             {
-                return StatusCode.Invalid_Path;
-            }
-            _workPath = checkDir;
-            return StatusCode.Success;
-        }
-
-        private static bool CheckValidPath(string path)
-        {
-            // Use current dir as workDir and find if it is a valid NPM project
-            var checkDir = path;
-            var packageJsonFilePath = Path.Join(checkDir, "package.json");
-
-            return File.Exists(packageJsonFilePath);
-        }
-
-        public void Configure()
-        {
-            if (_workPath == null)
-            {
-                Console.WriteLine("Unable to find work path");
-                return;
+                throw new InvalidOperationException("Invalid work directory");
             }
             
-            // Create internal path .npmgui to store configs such as package manager
-            AppHelper.Instance.SetupProjectConfig(_workPath);
+            _workDir = workDir;
+            SetupManager.Initialize(workDir!);
         }
 
-        public PackageListing? ListPackages ()
-        {
-            if (_workPath == null)
-            {
-                Console.WriteLine("Unable to find work path");
-                return null;
-            }
-            
-            var packages = _helper.FindPackagesOnDir(_workPath);
-            return packages;
-        }
-
-        private void FindPackageManager()
-        {
-
-        }
+        private static bool IsValidWorkDir(string? workDir) => workDir != null && Path.Exists(workDir) && File.Exists(Path.Combine(workDir, "package.json"));
+        
+        
     }
 }

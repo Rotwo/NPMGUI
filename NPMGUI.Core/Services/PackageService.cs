@@ -1,24 +1,15 @@
 ﻿using Newtonsoft.Json;
 using NPMGUI.Core.DTOs;
+using NPMGUI.Core.Interfaces;
 using NPMGUI.Core.Models;
 
 namespace NPMGUI.Core.Helpers
 {
-    internal class PackageHelper
+    internal class PackageService : IPackageService
     {
-        public static PackageHelper Instance { get; private set; }
-
-        public PackageHelper()
+        public PackageListing FindDependenciesOnDir(string workingDir)
         {
-            if(Instance == null)
-            {
-                Instance = this;
-            }
-        }
-
-        public PackageListing FindPackagesOnDir(string workingDir)
-        {
-            var jsonPath = workingDir + "/package.json";
+            var jsonPath = Path.Combine(workingDir, "/package.json");
 
             if(!Directory.Exists(workingDir)) throw new Exception("Invalid path");
 
