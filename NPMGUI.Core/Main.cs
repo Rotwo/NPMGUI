@@ -2,8 +2,10 @@
 using NPMGUI.Core.Models;
 using System.Diagnostics;
 using System.IO;
+using NPMGUI.Core.Factories;
 using NPMGUI.Core.Services.ConfigLoader;
 using NPMGUI.Core.Services.PackageManagement;
+using NPMGUI.Core.Services.PackageService;
 using NPMGUI.Core.Setup;
 
 namespace NPMGUI.Core
@@ -11,22 +13,32 @@ namespace NPMGUI.Core
     public class NPMGUICore
     {
         private string? _workDir;
-        private IConfigLoader _configLoader;
+        private readonly IConfigLoader _configLoader;
+        private readonly IPackageService _packageService;
+        private readonly PackageManagerFactory _factory;
+        
         private IPackageManager _packageManager;
-
+        
         public bool IsReady => IsValidWorkDir(_workDir);
 
-        public NPMGUICore(string? workDir, IConfigLoader configLoader, IPackageManager packageManager)
+        public NPMGUICore(IConfigLoader configLoader, IPackageService packageService, PackageManagerFactory factory)
         {
             _configLoader = configLoader;
-            _packageManager = packageManager;
-            
+            _packageService = packageService;
+            _factory = factory;
+        }
+        
+        public void Setup(string? workDir)
+        {
             if (!IsValidWorkDir(workDir))
-            {
                 throw new InvalidOperationException("Invalid work directory");
-            }
-            
+
             _workDir = workDir;
+            
+            _packageManager = _factory.Create(workDir!);
+            if (_packageManager is null)
+                throw new InvalidOperationException("No valid package manager found for this directory");
+
             _configLoader.Load(workDir!);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NPMGUI.Core.Factories;
 using NPMGUI.Core.Services.ConfigLoader;
 using NPMGUI.Core.Services.PackageManagement;
 using NPMGUI.Core.Services.PackageService;
@@ -11,8 +12,11 @@ public static class CoreStartup
     {
         var services = new ServiceCollection();
 
+        services.AddSingleton<IPackageManager, NpmPackageManager>();
+        services.AddSingleton<IPackageManager, PnpmPackageManager>();
+        services.AddSingleton<PackageManagerFactory>();
+        
         services.AddSingleton<IConfigLoader, ConfigLoader>();
-        services.AddSingleton<IPackageManager, PackageManager>();
         services.AddSingleton<IPackageService, PackageService>();
 
         services.AddSingleton<NPMGUICore>();

@@ -2,21 +2,10 @@
 
 namespace NPMGUI.Core.Factories;
 
-public class PackageManagerFactory
+public class PackageManagerFactory(IEnumerable<IPackageManager> managers)
 {
-    private readonly List<PackageManager> _managers;
-    
-    public PackageManagerFactory()
+    public IPackageManager? Create(string workDir)
     {
-        _managers = new List<PackageManager>
-        {
-            new NpmPackageManager(),
-            new PnpmPackageManager(),
-        };
-    }
-    
-    public PackageManager? Create(string workDir)
-    {
-        return _managers.Find(pm => pm.IsMatch(workDir));
+        return managers.FirstOrDefault(pm => pm.IsMatch(workDir));
     }
 }

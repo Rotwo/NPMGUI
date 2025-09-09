@@ -7,8 +7,13 @@ namespace NPMGUI.Core.Services.PackageService
 {
     public class PackageService : IPackageService
     {
-        private PackageManagerFactory _packageManagerFactory = new();
-
+        private readonly PackageManagerFactory _factory;
+        
+        public PackageService(PackageManagerFactory factory)
+        {
+            _factory = factory;
+        }
+        
         public PackageListing FindDependenciesOnDir(string workingDir)
         {
             var jsonPath = Path.Combine(workingDir, "/package.json");
@@ -32,10 +37,15 @@ namespace NPMGUI.Core.Services.PackageService
 
         public void InstallPackage(string package, string workDir)
         {
-            var pm = _packageManagerFactory.Create(workDir);
-            if(pm == null)
-                throw new Exception("Package Manager not found");
-            pm.InstallPackage(package);
+            var manager = _factory.Create(workDir);
+
+            if (manager is null)
+            {
+                throw new InvalidOperationException(
+                    $"Not found valid package manager on {workDir}");
+            }
+
+            manager.InstallPackage(package);
         }
     }
 }
