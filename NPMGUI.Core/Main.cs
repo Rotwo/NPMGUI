@@ -1,5 +1,4 @@
 ﻿using NPMGUI.Core.DTOs;
-using NPMGUI.Core.Helpers;
 using NPMGUI.Core.Models;
 using System.Diagnostics;
 using System.IO;

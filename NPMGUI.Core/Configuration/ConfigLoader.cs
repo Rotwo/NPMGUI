@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using NPMGUI.Core.DTOs;
 using NPMGUI.Core.Models;
 
 namespace NPMGUI.Core.Configuration;

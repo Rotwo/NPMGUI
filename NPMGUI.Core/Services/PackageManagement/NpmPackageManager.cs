@@ -1,4 +1,4 @@
-﻿namespace NPMGUI.Core.Data.PackageManagement;
+﻿namespace NPMGUI.Core.Services.PackageManagement;
 
 public class NpmPackageManager : PackageManager
 {

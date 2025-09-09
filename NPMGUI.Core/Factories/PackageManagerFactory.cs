@@ -1,5 +1,4 @@
-﻿using NPMGUI.Core.Data.PackageManagement;
-using NPMGUI.Core.Interfaces;
+﻿using NPMGUI.Core.Services.PackageManagement;
 
 namespace NPMGUI.Core.Factories;
 

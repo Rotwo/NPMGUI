@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using NPMGUI.Core.Data.PackageManagement;
+using NPMGUI.Core.Services.PackageManagement;
 
-namespace NPMGUI.Core.Models
+namespace NPMGUI.Core.DTOs
 {
     public class AppConfig
     {
