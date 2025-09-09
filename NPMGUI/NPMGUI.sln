@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPMGUI.Desktop", "..\NPMGUI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPMGUI.Core", "..\NPMGUI.Core\NPMGUI.Core.csproj", "{FB41035E-D5D7-0174-FCF9-48C3F0EAAB24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPMGUI.TestingProgram", "..\NPMGUI.Console\NPMGUI.TestingProgram.csproj", "{0F07988B-E01E-4BA4-A2E1-154B852387C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FB41035E-D5D7-0174-FCF9-48C3F0EAAB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB41035E-D5D7-0174-FCF9-48C3F0EAAB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB41035E-D5D7-0174-FCF9-48C3F0EAAB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F07988B-E01E-4BA4-A2E1-154B852387C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F07988B-E01E-4BA4-A2E1-154B852387C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F07988B-E01E-4BA4-A2E1-154B852387C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F07988B-E01E-4BA4-A2E1-154B852387C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
