@@ -44,7 +44,12 @@ namespace NPMGUI.Core
         }
 
         private static bool IsValidWorkDir(string? workDir) => workDir != null && Path.Exists(workDir) && File.Exists(Path.Combine(workDir, "package.json"));
-        
+
+        public PackageListing ListPackages()
+        {
+            var packages = _packageService.FindDependenciesOnDir(_workDir!);
+            return packages;
+        }
         
     }
 }

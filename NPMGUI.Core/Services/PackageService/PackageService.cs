@@ -17,11 +17,11 @@ namespace NPMGUI.Core.Services.PackageService
         
         public PackageListing FindDependenciesOnDir(string workingDir)
         {
-            var jsonPath = Path.Combine(workingDir, "/package.json");
+            var jsonPath = Path.Combine(workingDir, "package.json");
 
             if(!Directory.Exists(workingDir)) throw new Exception("Invalid path");
 
-            if (!Path.Exists(jsonPath)) throw new Exception("Invalid folder project, not found any project.json");
+            if (!Path.Exists(jsonPath)) throw new Exception("Invalid folder project, not found any package.json");
 
             using StreamReader reader = new(jsonPath);
             string rawJson = reader.ReadToEnd();
@@ -31,8 +31,8 @@ namespace NPMGUI.Core.Services.PackageService
             var deserialized = JsonConvert.DeserializeObject<Package>(rawJson);
             return new PackageListing
             {
-                Dependencies = deserialized.Dependencies,
-                DevDependencies = deserialized.DevDependencies,
+                Dependencies = deserialized?.Dependencies,
+                DevDependencies = deserialized?.DevDependencies,
             };
         }
 
