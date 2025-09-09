@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NPMGUI.Core.Factories;
+using NPMGUI.Core.Interfaces;
 using NPMGUI.Core.Services.ConfigLoader;
 using NPMGUI.Core.Services.PackageManagement;
 using NPMGUI.Core.Services.PackageService;

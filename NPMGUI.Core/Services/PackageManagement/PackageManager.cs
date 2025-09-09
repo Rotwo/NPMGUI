@@ -1,4 +1,6 @@
-﻿namespace NPMGUI.Core.Services.PackageManagement;
+﻿using NPMGUI.Core.Interfaces;
+
+namespace NPMGUI.Core.Services.PackageManagement;
 
 public abstract class PackageManager() : IPackageManager
 {

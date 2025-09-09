@@ -1,6 +1,6 @@
 ﻿using NPMGUI.Core.DTOs;
 
-namespace NPMGUI.Core.Services.ConfigLoader;
+namespace NPMGUI.Core.Interfaces;
 
 public interface IConfigLoader
 {

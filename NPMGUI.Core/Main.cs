@@ -3,6 +3,7 @@ using NPMGUI.Core.Models;
 using System.Diagnostics;
 using System.IO;
 using NPMGUI.Core.Factories;
+using NPMGUI.Core.Interfaces;
 using NPMGUI.Core.Services.ConfigLoader;
 using NPMGUI.Core.Services.PackageManagement;
 using NPMGUI.Core.Services.PackageService;

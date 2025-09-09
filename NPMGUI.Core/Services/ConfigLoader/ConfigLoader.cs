@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NPMGUI.Core.DTOs;
+using NPMGUI.Core.Interfaces;
 
 namespace NPMGUI.Core.Services.ConfigLoader;
 

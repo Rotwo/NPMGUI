@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NPMGUI.Core.DTOs;
 using NPMGUI.Core.Factories;
+using NPMGUI.Core.Interfaces;
 using NPMGUI.Core.Models;
 
 namespace NPMGUI.Core.Services.PackageService
