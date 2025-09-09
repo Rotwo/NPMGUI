@@ -1,17 +1,15 @@
-﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NPMGUI.Core.DTOs;
-using NPMGUI.Core.Models;
 
-namespace NPMGUI.Core.Configuration;
+namespace NPMGUI.Core.Services.ConfigLoader;
 
-public static class ConfigLoader
+public class ConfigLoader : IConfigLoader
 {
     private static AppConfig? _config;
     private const string APP_CONFIG_FOLDER = ".npmgui";
     private const string CONFIG_FILENAME = "config.json";
     
-    public static void Load(string workDir)
+    public void Load(string workDir)
     {
         var configFile = Path.Combine(workDir, APP_CONFIG_FOLDER, CONFIG_FILENAME);
 
@@ -30,7 +28,7 @@ public static class ConfigLoader
         _config = JsonConvert.DeserializeObject<AppConfig>(json);
     } 
     
-    public static AppConfig GetConfig()
+    public AppConfig GetConfig()
     {
         if (_config == null)
             throw new InvalidOperationException("Configuration not loaded.");
@@ -38,7 +36,7 @@ public static class ConfigLoader
         return _config;
     }
 
-    public static void Save(string workDir)
+    public void Save(string workDir)
     {
         var configDir = Path.Combine(workDir, APP_CONFIG_FOLDER);
         var configFile = Path.Combine(configDir, CONFIG_FILENAME);
