@@ -1,6 +1,6 @@
-﻿namespace NPMGUI.Core.Setup;
+﻿using NPMGUI.Core.Services.ConfigLoader;
 
-using NPMGUI.Core.Configuration;
+namespace NPMGUI.Core.Setup;
 
 public static class SetupManager
 {
