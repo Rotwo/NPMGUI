@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	<AssemblyName>npmgui.ui</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

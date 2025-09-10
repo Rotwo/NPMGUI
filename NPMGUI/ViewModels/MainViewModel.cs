@@ -20,7 +20,8 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel(PageFactory pageFactory)
     {
         _pageFactory = pageFactory;
-        CoreService.Instance.OnCoreChanged += (sender, core) => IsCoreAvailable = CoreService.Instance.IsCoreValid;
+        if (CoreService.Instance.Core != null) _isCoreAvailable = CoreService.Instance.Core.IsReady;
+        CoreService.Instance.OnCoreChanged += (sender, core) => IsCoreAvailable = core.IsReady;
         
         GoToPackages();
     }

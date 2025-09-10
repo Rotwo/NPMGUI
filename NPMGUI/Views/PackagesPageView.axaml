@@ -4,11 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="clr-namespace:NPMGUI.ViewModels"
+             xmlns:dtOs="clr-namespace:NPMGUI.DTOs"
              x:DataType="vm:PackagesPageViewModel"
-             x:Class="NPMGUI.Views.PackagesPageView">
+             x:Class="NPMGUI.Views.PackagesPageView"
+             x:CompileBindings="True">
     <Design.DataContext>
         <vm:PackagesPageViewModel></vm:PackagesPageViewModel>
     </Design.DataContext>
     
-    <Label>Packages Page View</Label>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="24" Spacing="24">
+        <StackPanel HorizontalAlignment="Stretch">
+            <Label FontSize="24" FontWeight="SemiBold">Dependencies</Label>
+            
+            <ItemsControl ItemsSource="{Binding DependenciesList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="dtOs:DependencyItem">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,10,0"/>
+                            <TextBlock Text="{Binding Version}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Stretch">
+            <Label FontSize="24" FontWeight="SemiBold">Dev Dependencies</Label>
+            
+            <ItemsControl ItemsSource="{Binding DevDependenciesList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="dtOs:DependencyItem">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,10,0"/>
+                            <TextBlock Text="{Binding Version}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        
+    </StackPanel>
+    </ScrollViewer>
+    
+    
+    
+
 </UserControl>
