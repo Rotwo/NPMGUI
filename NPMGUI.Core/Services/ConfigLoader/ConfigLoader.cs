@@ -9,7 +9,13 @@ public class ConfigLoader : IConfigLoader
     private static AppConfig? _config;
     private const string APP_CONFIG_FOLDER = ".npmgui";
     private const string CONFIG_FILENAME = "config.json";
-    
+
+    private JsonSerializerSettings settings = new()
+    {
+        TypeNameHandling = TypeNameHandling.Auto, // or All
+        Formatting = Formatting.Indented
+    };
+
     public void Load(string workDir)
     {
         var configFile = Path.Combine(workDir, APP_CONFIG_FOLDER, CONFIG_FILENAME);
@@ -26,7 +32,7 @@ public class ConfigLoader : IConfigLoader
         }
         
         var json = File.ReadAllText(configFile);
-        _config = JsonConvert.DeserializeObject<AppConfig>(json);
+        _config = JsonConvert.DeserializeObject<AppConfig>(json, settings);
     } 
     
     public AppConfig GetConfig()
@@ -41,7 +47,7 @@ public class ConfigLoader : IConfigLoader
     {
         var configDir = Path.Combine(workDir, APP_CONFIG_FOLDER);
         var configFile = Path.Combine(configDir, CONFIG_FILENAME);
-        var json = JsonConvert.SerializeObject(_config);
+        var json = JsonConvert.SerializeObject(_config, settings);
 
         if (!Directory.Exists(configDir))
         {
