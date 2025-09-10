@@ -50,6 +50,11 @@ namespace NPMGUI.Core
             var packages = _packageService.FindDependenciesOnDir(_workDir!);
             return packages;
         }
-        
+
+        public async Task<TaskStatus> InstallPackage(string packageName, string packageVersion, bool isDevDependency = false)
+        {
+            var result = await _packageService.InstallPackage(packageName, packageVersion, _workDir!, isDevDependency);
+            return result;
+        }
     }
 }

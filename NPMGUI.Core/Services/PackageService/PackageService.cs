@@ -36,7 +36,7 @@ namespace NPMGUI.Core.Services.PackageService
             };
         }
 
-        public void InstallPackage(string package, string workDir)
+        public async Task<TaskStatus> InstallPackage(string packageName, string  packageVersion, string workDir, bool isDevDependency = false)
         {
             var manager = _factory.Create(workDir);
 
@@ -46,7 +46,10 @@ namespace NPMGUI.Core.Services.PackageService
                     $"Not found valid package manager on {workDir}");
             }
 
-            manager.InstallPackage(package);
+            var package = string.Join("@", packageName, packageVersion);
+                
+            var taskResult = await manager.InstallPackage(package, workDir, isDevDependency);
+            return taskResult;
         }
     }
 }

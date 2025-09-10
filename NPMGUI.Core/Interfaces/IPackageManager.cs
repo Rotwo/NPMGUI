@@ -2,6 +2,6 @@
 
 public interface IPackageManager
 {
-    void InstallPackage(string packageName);
+    Task<TaskStatus> InstallPackage(string package, string workDir, bool isDevDependency = false);
     bool IsMatch(string workDir);
 }
