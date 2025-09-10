@@ -13,7 +13,8 @@ public partial class PackagesPageViewModel : PageViewModel
     public PackagesPageViewModel()
     {
         PageName = ApplicationPagesName.Packages;
-        
+
+        CoreService.Instance.OnCoreChanged += (sender, core) => LoadPackages();
         LoadPackages();
     }
 
