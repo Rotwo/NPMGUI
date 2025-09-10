@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using NPMGUI.Data;
 using NPMGUI.Factories;
+using NPMGUI.Helpers;
 using NPMGUI.Views;
 
 namespace NPMGUI.ViewModels;
@@ -12,10 +13,14 @@ public partial class MainViewModel : ViewModelBase
     
     [ObservableProperty]
     private PageViewModel _currentPage;
-
+    
+    [ObservableProperty]
+    private bool _isCoreAvailable;
+    
     public MainViewModel(PageFactory pageFactory)
     {
         _pageFactory = pageFactory;
+        CoreService.Instance.OnCoreChanged += (sender, core) => IsCoreAvailable = CoreService.Instance.IsCoreValid;
         
         GoToPackages();
     }

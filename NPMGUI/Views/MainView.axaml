@@ -13,39 +13,65 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-
-	<Grid Background="{DynamicResource PrimaryBackground}" ColumnDefinitions="auto, *">
-		<ContentControl Grid.Column="1" Content="{Binding CurrentPage}"></ContentControl>
+	<Grid Background="{DynamicResource PrimaryBackground}">
+		<Grid IsVisible="{Binding IsCoreAvailable}" ColumnDefinitions="auto, *">
+			<ContentControl Grid.Column="1" Content="{Binding CurrentPage}"></ContentControl>
 		
-		<Border Grid.Column="0" Padding="20" Background="{DynamicResource SidebarBackground}">
-			<Grid RowDefinitions="*, auto">
-				<StackPanel Grid.Row="0" Spacing="4">
-					<Image Source="/Assets/Images/Logo.png" Width="160" Margin="0 0 0 10"></Image>
+			<Border Grid.Column="0" Padding="20" Background="{DynamicResource SidebarBackground}">
+				<Grid RowDefinitions="*, auto">
+					<StackPanel Grid.Row="0" Spacing="4">
+						<Image Source="/Assets/Images/Logo.png" Width="160" Margin="0 0 0 10"></Image>
 					
-					<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToPackagesCommand}">
-						<StackPanel Orientation="Horizontal">
-							<Label Classes="icon_fill" Content="&#xE390;" VerticalAlignment="Center"></Label>
-							<Label>Packages</Label>
-						</StackPanel>
-					</Button>
-					<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToSearchCommand}">
-						<StackPanel Orientation="Horizontal">
-							<Label Classes="icon_fill" Content="&#xE30C;" VerticalAlignment="Center"></Label>
-							<Label>Search</Label>
-						</StackPanel>
-					</Button>
-					<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToScriptsCommand}">
-						<StackPanel Orientation="Horizontal">
-							<Label Classes="icon" Content="&#xE1BE;" VerticalAlignment="Center"></Label>
-							<Label>Scripts</Label>
-						</StackPanel>
-					</Button>
-				</StackPanel>
+						<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToPackagesCommand}">
+							<StackPanel Orientation="Horizontal">
+								<Label Classes="icon_fill" Content="&#xE390;" VerticalAlignment="Center"></Label>
+								<Label>Packages</Label>
+							</StackPanel>
+						</Button>
+						<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToSearchCommand}">
+							<StackPanel Orientation="Horizontal">
+								<Label Classes="icon_fill" Content="&#xE30C;" VerticalAlignment="Center"></Label>
+								<Label>Search</Label>
+							</StackPanel>
+						</Button>
+						<Button Classes="sidebar" HorizontalAlignment="Stretch" Command="{Binding GoToScriptsCommand}">
+							<StackPanel Orientation="Horizontal">
+								<Label Classes="icon" Content="&#xE1BE;" VerticalAlignment="Center"></Label>
+								<Label>Scripts</Label>
+							</StackPanel>
+						</Button>
+					</StackPanel>
 
-				<Button Classes="transparent" Grid.Row="1">
-					<Label FontSize="18" Classes="icon" Content="&#xE272;"></Label>
-				</Button>
-			</Grid>
+					<Button Classes="transparent" Grid.Row="1">
+						<Label FontSize="18" Classes="icon" Content="&#xE272;"></Label>
+					</Button>
+				</Grid>
+			</Border>
+		</Grid>
+
+		<!-- Centered overlay element -->
+		<Border IsVisible="{Binding !IsCoreAvailable}" Width="300" Height="300"
+		        Background="{DynamicResource OverlayBackground}"
+		        HorizontalAlignment="Center"
+		        VerticalAlignment="Center"
+		        ZIndex="100"
+		        CornerRadius="8"
+		        >
+				<Grid RowDefinitions="80, *, 40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="16">
+					<StackPanel Spacing="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 16 0 0">
+						<Label FontSize="24" Classes="icon" Content="&#xE4E0;"></Label>
+						<Label FontWeight="SemiBold" FontSize="20" Content="Invalid Project" Foreground="{DynamicResource SecondaryForeground}"/>
+					</StackPanel>
+					<TextBlock FontSize="16" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center">We couldn't find any valid Javascript/Typescript project on this folder, please select the desired project folder.</TextBlock>
+					<Button Click="Select_Folder_Button" Grid.Row="2" Background="{DynamicResource SecondaryButtonBackground}" HorizontalAlignment="Stretch" Command="{Binding GoToPackagesCommand}">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Classes="icon_fill" Content="&#xE256;" VerticalAlignment="Center"></Label>
+							<Label>Select Folder</Label>
+						</StackPanel>
+					</Button>
+				</Grid>
 		</Border>
 	</Grid>
+	
+	
 </UserControl>

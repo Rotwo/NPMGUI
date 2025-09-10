@@ -29,8 +29,6 @@ public partial class App : Application
         collections.AddTransient<ScriptsPageViewModel>();
         collections.AddTransient<SearchPageViewModel>();
         
-        collections.AddSingleton<CoreService>();
-        
         collections.AddSingleton<Func<ApplicationPagesName, PageViewModel>>(x => name => name switch
         {
             ApplicationPagesName.Packages => x.GetRequiredService<PackagesPageViewModel>(),
@@ -51,7 +49,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = services.GetRequiredService<MainViewModel>()
+                DataContext = services.GetRequiredService<MainViewModel>(),
             };
         }
         /* else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

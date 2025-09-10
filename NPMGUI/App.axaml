@@ -53,6 +53,11 @@
 		<SolidColorBrush x:Key="ButtonBackgroundPressed">#464646</SolidColorBrush>
 		<SolidColorBrush x:Key="ButtonForeground">#EEF0F2</SolidColorBrush>
 
+		<SolidColorBrush x:Key="SecondaryButtonBackground">#3A3A3A</SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryButtonBackgroundHover">#4A4A4A</SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryButtonBackgroundPressed">#5A5A5A</SolidColorBrush>
+		<SolidColorBrush x:Key="SecondaryButtonForeground">#DADADA</SolidColorBrush>
+
 		<!-- Inputs -->
 		<SolidColorBrush x:Key="InputBackground">#232323</SolidColorBrush>
 		<SolidColorBrush x:Key="InputForeground">#EEF0F2</SolidColorBrush>
