@@ -1,15 +1,19 @@
 ﻿using NPMGUI.Core.Interfaces;
+using NPMGUI.Core.Helpers;
 
 namespace NPMGUI.Core.Services.PackageManagement;
 
 public abstract class PackageManager() : IPackageManager
 {
-    public string Alias { get; set; }
-    public string[] LookupFiles { get; set; }
-    
-    public async virtual Task<TaskStatus> InstallPackage(string package, string workDir, bool isDevDependency = false)
+    public abstract string Alias { get; }
+    public abstract string[] LookupFiles { get; }
+
+    protected abstract string BuildInstallCommand(string package, bool isDevDependency);
+
+    public async Task<TaskStatus> InstallPackage(string package, string workDir, bool isDevDependency = false)
     {
-        throw new NotImplementedException();
+        var command = BuildInstallCommand(package, isDevDependency);
+        return await ProcessExecutor.RunAsync(Alias, command, workDir);
     }
 
     public bool IsMatch(string workDir)

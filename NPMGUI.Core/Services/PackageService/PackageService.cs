@@ -15,8 +15,14 @@ namespace NPMGUI.Core.Services.PackageService
             _factory = factory;
         }
         
-        public PackageListing FindDependenciesOnDir(string workingDir)
+        public PackageListing FindDependenciesOnDir(string? workingDir)
         {
+            if (workingDir is null) return new PackageListing
+            {
+                Dependencies = null,
+                DevDependencies = null,
+            };
+
             var jsonPath = Path.Combine(workingDir, "package.json");
 
             if(!Directory.Exists(workingDir)) throw new Exception("Invalid path");
