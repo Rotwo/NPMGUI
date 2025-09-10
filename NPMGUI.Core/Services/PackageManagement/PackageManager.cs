@@ -6,9 +6,12 @@ public abstract class PackageManager() : IPackageManager
 {
     public string Alias { get; set; }
     public string[] LookupFiles { get; set; }
+    
+    public async virtual Task<TaskStatus> InstallPackage(string package, string workDir, bool isDevDependency = false)
+    {
+        throw new NotImplementedException();
+    }
 
-
-    public abstract void InstallPackage(string packageName);
     public bool IsMatch(string workDir)
     {
         bool isMatch = LookupFiles.All(f => File.Exists(Path.Combine(workDir, f)));
