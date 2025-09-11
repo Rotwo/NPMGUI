@@ -4,7 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="clr-namespace:NPMGUI.ViewModels"
+             xmlns:dtos="clr-namespace:NPMGUI.DTOs"
              x:DataType="vm:ScriptsPageViewModel"
-             x:Class="NPMGUI.Views.ScriptsPageView">
-    <Label>Scripts Page View</Label>
+             x:Class="NPMGUI.Views.ScriptsPageView"
+             x:CompileBindings="True">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24" Spacing="24">
+            <StackPanel HorizontalAlignment="Stretch">
+                <Label FontSize="24" FontWeight="SemiBold">Scripts</Label>
+            
+                <ItemsControl ItemsSource="{Binding ScriptsList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="dtos:ScriptItem">
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,10,0"/>
+                                <TextBlock Text="{Binding Command}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
