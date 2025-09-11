@@ -10,4 +10,6 @@ public class NpmPackageManager : PackageManager
 
     protected override string BuildInstallCommand(string package, bool isDevDependency)
         => $"install {(isDevDependency ? "-D" : "")} {package}";
+
+    protected override string BuildScriptCommand(string script) => $"run {script}";
 }

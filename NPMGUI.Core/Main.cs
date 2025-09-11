@@ -48,10 +48,20 @@ namespace NPMGUI.Core
             return packages;
         }
 
-        public async Task<TaskStatus> InstallPackage(string packageName, string packageVersion, bool isDevDependency = false)
+        public ScriptsListing ListScripts()
         {
-            var result = await _packageService.InstallPackage(packageName, packageVersion, _workDir!, isDevDependency);
-            return result;
+            var scripts = _packageService.FindScriptsOnDir(_workDir!);
+            return scripts;
+        }
+
+        public ProcessExecution InstallPackage(string packageName, string packageVersion, bool isDevDependency = false, Action<string>? onOutput = null,  Action<string>? onError = null)
+        {
+            return _packageService.InstallPackage(packageName, packageVersion, _workDir!, isDevDependency, onOutput, onError);
+        }
+
+        public ProcessExecution RunScript(string script, Action<string>? onOutput = null,  Action<string>? onError = null)
+        {
+            return _packageService.RunScript(script, _workDir!, onOutput, onError);
         }
     }
 }

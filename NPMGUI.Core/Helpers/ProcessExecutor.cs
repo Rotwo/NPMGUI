@@ -1,11 +1,19 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using NPMGUI.Core.DTOs;
 
 namespace NPMGUI.Core.Helpers;
 
 public static class ProcessExecutor
 {
-    public static async Task<TaskStatus> RunAsync(string alias, string arguments, string workDir)
+    private static List<Process> _processList = [];
+    
+    public static ProcessExecution RunAsync(
+        string alias,
+        string arguments,
+        string workDir,
+        Action<string>? onOutput = null,
+        Action<string>? onError = null)
     {
         string shell, cmd;
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -29,25 +37,52 @@ public static class ProcessExecutor
             UseShellExecute = false,
             CreateNoWindow = true
         };
-
-        using var process = new Process { StartInfo = startInfo };
-        try
+        
+        var process = new Process { StartInfo = startInfo, EnableRaisingEvents = true };
+        
+        process.OutputDataReceived += (s, e) =>
         {
-            process.Start();
-            var output = await process.StandardOutput.ReadToEndAsync();
-            var error = await process.StandardError.ReadToEndAsync();
-            await process.WaitForExitAsync();
+            if (e.Data != null)
+                onOutput?.Invoke(e.Data);
+        };
 
-            if (process.ExitCode != 0)
-                throw new Exception($"{alias} failed: {error}");
-
-            Console.WriteLine(output);
-            return TaskStatus.RanToCompletion;
-        }
-        catch (Exception ex)
+        process.ErrorDataReceived += (s, e) =>
         {
-            Console.Error.WriteLine($"Error running {alias}: {ex.Message}");
-            return TaskStatus.Faulted;
+            if (e.Data != null)
+                onError?.Invoke(e.Data);
+        };
+
+        var tcs = new TaskCompletionSource<bool>();
+
+        process.Exited += (s, e) =>
+        {
+            tcs.TrySetResult(true);
+        };
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+
+        _processList.Append(process);
+
+        return new ProcessExecution
+        {
+            Process = process,
+            Task = tcs.Task,
+        };
+    }
+
+    public static void Stop(Process process)
+    {
+        if (process != null && !process.HasExited)
+        {
+            process.Kill(true);
+            process.Dispose();
         }
+    }
+
+    public static List<Process> GetActiveProcesses()
+    {
+        return _processList;
     }
 }
