@@ -4,7 +4,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="clr-namespace:NPMGUI.ViewModels"
+             xmlns:dtos="clr-namespace:NPMGUI.DTOs"
              x:DataType="vm:SearchPageViewModel"
-             x:Class="NPMGUI.Views.SearchPageView">
-    <Label>Search Page View</Label>
+             x:Class="NPMGUI.Views.SearchPageView"
+             x:CompileBindings="True"
+             >
+    <ScrollViewer>
+        <Grid Margin="24">
+            <StackPanel IsVisible="{Binding IsPackageSelected}" Spacing="8">
+                <Button Padding="4" Background="{DynamicResource SecondaryButtonBackground}" Margin="0" Command="{Binding UnselectPackageCommand}">
+                    <Label FontSize="20" Classes="icon">&#xE058;</Label>
+                </Button>
+                <StackPanel Spacing="24">
+                    <Grid ColumnDefinitions="Auto, *">
+                        <Label Content="{Binding SelectedPackage.Name}" FontSize="24" FontWeight="SemiBold"></Label>
+                        <DockPanel Grid.Column="1" LastChildFill="False">
+                            <Button DockPanel.Dock="Right"
+                                    Background="{DynamicResource ButtonBackground}">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Label VerticalAlignment="Center">Install</Label>
+                                    <Label Classes="icon" VerticalAlignment="Center" Margin="4,0,0,0">&#xE05C;</Label>
+                                </StackPanel>
+                            </Button>
+                        </DockPanel>
+                    </Grid>
+                    
+                    <TextBlock FontSize="16" TextWrapping="Wrap" Text="{Binding SelectedPackage.Description}"></TextBlock>
+                    
+                    <TextBlock FontWeight="Light" FontSize="14" Text="{Binding SelectedPackage.date}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            
+            <Grid IsVisible="{Binding !IsPackageSelected}" RowDefinitions="Auto, *">
+                <TextBox Grid.Row="0"
+                         Watermark="Search npm packages..."
+                         Text="{Binding SearchText}"
+                         KeyDown="OnSearchKeyDown"
+                         Margin="0,0,10,0"/>
+        
+                <ItemsControl Margin="0 ,20, 0, 0" Grid.Row="1" ItemsSource="{Binding Results}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="dtos:Result">
+                            <Button Click="OnPackageClicked" HorizontalAlignment="Stretch" Padding="10" Margin="0, 0, 0, 10" BorderBrush="Gray" BorderThickness="1" CornerRadius="4">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Package.Name}" FontWeight="Bold" FontSize="16"/>
+                                    <TextBlock Text="{Binding Package.Description}" FontStyle="Italic" />
+                                    <TextBlock Text="{Binding Package.Version}" />
+                                    <TextBlock Text="{Binding Package.date}" />
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+        
+    </ScrollViewer>
 </UserControl>

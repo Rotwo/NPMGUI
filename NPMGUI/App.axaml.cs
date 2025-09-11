@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NPMGUI.Data;
 using NPMGUI.Factories;
 using NPMGUI.Helpers;
+using NPMGUI.Interfaces;
+using NPMGUI.Services;
 using NPMGUI.ViewModels;
 using NPMGUI.Views;
 
@@ -14,6 +16,8 @@ namespace NPMGUI;
 
 public partial class App : Application
 {
+    public IServiceProvider Services { get; private set; }
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -39,7 +43,10 @@ public partial class App : Application
         
         collections.AddSingleton<PageFactory>();
         
+        collections.AddSingleton<IApiService, ApiService>();
+        
         var services = collections.BuildServiceProvider();
+        Services = services;
         
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
