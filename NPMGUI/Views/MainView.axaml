@@ -42,9 +42,27 @@
 						</Button>
 					</StackPanel>
 
-					<Button Classes="transparent" Grid.Row="1">
-						<Label FontSize="18" Classes="icon" Content="&#xE272;"></Label>
-					</Button>
+					<StackPanel Grid.Row="1" Spacing="16">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock 
+								VerticalAlignment="Center" 
+								FontSize="16" 
+								Text="{Binding ProcessesRunningCount}" />
+    
+							<Label 
+								VerticalAlignment="Center" 
+								FontSize="16" 
+								Classes="icon" 
+								Content="&#xE80E;" 
+								Margin="6,2,0,0" 
+								Padding="0" />
+						</StackPanel>
+						
+						<Button Classes="transparent" Grid.Row="1">
+							<Label FontSize="18" Classes="icon" Content="&#xE272;" Padding="0" Margin="0"></Label>
+						</Button>
+					</StackPanel>
+
 				</Grid>
 			</Border>
 		</Grid>

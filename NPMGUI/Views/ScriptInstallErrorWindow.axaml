@@ -1,0 +1,37 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:NPMGUI.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:NPMGUI.Views"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
+        Width="400" Height="500"
+        x:Class="NPMGUI.Views.ScriptInstallErrorWindow"
+        Icon="/Assets/window-error.ico"
+        Title="Error on Package Install"
+        x:DataType="vm:ScriptInstallationErrorViewModel"
+        CanResize="False"
+        x:CompileBindings="True"
+        >
+    <Grid Background="{DynamicResource PrimaryBackground}">
+        <Grid Margin="24" RowDefinitions="Auto, *">
+            <Label FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource PrimaryForeground}">Error</Label>
+            <Grid RowDefinitions="*, Auto" Grid.Row="1" VerticalAlignment="Stretch">
+                <ListBox ItemsSource="{Binding ErrorMessages}" Margin="0 8 0 20">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding $parent[Window]}" Background="{DynamicResource ButtonBackground}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label Classes="icon" VerticalAlignment="Center" Margin="4,0,0,0">&#xE4F6;</Label>
+                        <Label VerticalAlignment="Center">Close Window</Label>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -19,7 +19,7 @@
                     <Grid ColumnDefinitions="Auto, *">
                         <Label Content="{Binding SelectedPackage.Name}" FontSize="24" FontWeight="SemiBold"></Label>
                         <DockPanel Grid.Column="1" LastChildFill="False">
-                            <Button DockPanel.Dock="Right"
+                            <Button Command="{Binding InstallPackageCommand}" CommandParameter="{Binding SelectedPackage}" DockPanel.Dock="Right"
                                     Background="{DynamicResource ButtonBackground}">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <Label VerticalAlignment="Center">Install</Label>

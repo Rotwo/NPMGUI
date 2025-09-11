@@ -44,6 +44,7 @@ public partial class App : Application
         collections.AddSingleton<PageFactory>();
         
         collections.AddSingleton<IApiService, ApiService>();
+        collections.AddSingleton<IProcessService, ProcessService>();
         
         var services = collections.BuildServiceProvider();
         Services = services;

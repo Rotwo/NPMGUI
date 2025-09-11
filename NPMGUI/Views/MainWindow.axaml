@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		Width="800" Height="450"
         x:Class="NPMGUI.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/app-icon.ico"
         Title="NPMGUI">
         <views:MainView />
 </Window>
