@@ -10,4 +10,6 @@ public class PnpmPackageManager : PackageManager
 
     protected override string BuildInstallCommand(string package, bool isDevDependency)
         => $"add {(isDevDependency ? "-D" : "")} {package}";
+    
+    protected override string BuildScriptCommand(string script) => $"run {script}";
 }

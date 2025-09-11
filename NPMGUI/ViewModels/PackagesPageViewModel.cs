@@ -57,7 +57,7 @@ public partial class PackagesPageViewModel : PageViewModel
     private void LoadPackages()
     {
         Console.WriteLine("Loading packages ----------------------------------------------------:");
-        
+
         var packages = CoreService.Instance.Core?.ListPackages();
         
         Console.WriteLine(JsonSerializer.Serialize(packages));

@@ -14,35 +14,37 @@ namespace NPMGUI.Core.Services.PackageService
         {
             _factory = factory;
         }
+
+        private static Package? GetProjectPackage(string? workingDir)
+        {
+            if (workingDir is null) return null;
+            
+            var jsonPath = Path.Combine(workingDir, "package.json");
+            if (!File.Exists(jsonPath)) throw new FileNotFoundException("Package.json not found", jsonPath);
+            
+            using StreamReader reader = new(jsonPath);
+            var rawJson =  reader.ReadToEnd();
+            return JsonConvert.DeserializeObject<Package>(rawJson);
+        }
         
         public PackageListing FindDependenciesOnDir(string? workingDir)
         {
-            if (workingDir is null) return new PackageListing
-            {
-                Dependencies = null,
-                DevDependencies = null,
-            };
-
-            var jsonPath = Path.Combine(workingDir, "package.json");
-
-            if(!Directory.Exists(workingDir)) throw new Exception("Invalid path");
-
-            if (!Path.Exists(jsonPath)) throw new Exception("Invalid folder project, not found any package.json");
-
-            using StreamReader reader = new(jsonPath);
-            string rawJson = reader.ReadToEnd();
-
-            Console.WriteLine(rawJson);
-
-            var deserialized = JsonConvert.DeserializeObject<Package>(rawJson);
+            var package = GetProjectPackage(workingDir);
+            if (package is null)
+                return new PackageListing
+                {
+                    Dependencies = null,
+                    DevDependencies = null
+                };
+            
             return new PackageListing
             {
-                Dependencies = deserialized?.Dependencies,
-                DevDependencies = deserialized?.DevDependencies,
+                Dependencies = package?.Dependencies,
+                DevDependencies = package?.DevDependencies,
             };
         }
 
-        public async Task<TaskStatus> InstallPackage(string packageName, string  packageVersion, string workDir, bool isDevDependency = false)
+        public ProcessExecution InstallPackage(string packageName, string  packageVersion, string workDir, bool isDevDependency = false, Action<string>? onOutput = null, Action<string>? onError = null)
         {
             var manager = _factory.Create(workDir);
 
@@ -54,7 +56,31 @@ namespace NPMGUI.Core.Services.PackageService
 
             var package = string.Join("@", packageName, packageVersion);
                 
-            var taskResult = await manager.InstallPackage(package, workDir, isDevDependency);
+            var task = manager.InstallPackage(package, workDir, isDevDependency, onOutput, onError);
+            return task;
+        }
+
+        public ScriptsListing FindScriptsOnDir(string? workingDir)
+        {
+            var package = GetProjectPackage(workingDir);
+            if (package is null)
+                return new ScriptsListing
+                {
+                    Scripts = null,
+                };
+
+            return new ScriptsListing
+            {
+                Scripts = package?.Scripts
+            };
+        }
+
+        public ProcessExecution RunScript(string script, string workDir, Action<string>? onOutput = null, Action<string>? onError = null)
+        {
+            var manager = _factory.Create(workDir);
+            if (manager is null) throw new InvalidOperationException($"Not found valid package manager on {workDir}");
+            
+            var taskResult = manager.RunScript(script, workDir, onOutput, onError);
             return taskResult;
         }
     }
