@@ -17,13 +17,15 @@
         <StackPanel HorizontalAlignment="Stretch">
             <Label FontSize="24" FontWeight="SemiBold">Dependencies</Label>
             
-            <ItemsControl ItemsSource="{Binding DependenciesList}">
+            <ItemsControl ItemsSource="{Binding DependenciesList}" Margin="0 10 0 0">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="dtos:DependencyItem">
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,10,0"/>
-                            <TextBlock Text="{Binding Version}" />
-                        </StackPanel>
+                        <Border CornerRadius="8" HorizontalAlignment="Stretch" Background="{DynamicResource SecondaryBackground}" Padding="10" Margin="0 0 0 10">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Version}" />
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

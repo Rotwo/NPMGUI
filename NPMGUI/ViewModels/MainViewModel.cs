@@ -11,7 +11,7 @@ namespace NPMGUI.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     private PageFactory _pageFactory;
-    private readonly IProcessService _processService;
+    private readonly ITasksService _tasksService;
     
     [ObservableProperty]
     private PageViewModel _currentPage;
@@ -25,18 +25,18 @@ public partial class MainViewModel : ViewModelBase
     
     public string ProcessesRunningText => $"{ProcessesRunningCount} {(ProcessesRunningCount != 1 ? "processes" : "process")} running";
     
-    public MainViewModel(PageFactory pageFactory, IProcessService processService)
+    public MainViewModel(PageFactory pageFactory, ITasksService tasksService)
     {
         _pageFactory = pageFactory;
-        _processService = processService;
+        _tasksService = tasksService;
         
         if (CoreService.Instance.Core != null) _isCoreAvailable = CoreService.Instance.Core.IsReady;
         CoreService.Instance.OnCoreChanged += (sender, core) => IsCoreAvailable = core.IsReady;
         
         GoToPackages();
 
-        _processService.ProcessListChanged += (sender, args) =>
-            ProcessesRunningCount = _processService.GetRunningProcesses().Count;
+        _tasksService.TaskListChanged += (sender, args) =>
+            ProcessesRunningCount = _tasksService.GetRunningTasks().Count;
     }
 
     [RelayCommand]

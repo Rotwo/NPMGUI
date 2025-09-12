@@ -62,7 +62,6 @@
 							<Label FontSize="18" Classes="icon" Content="&#xE272;" Padding="0" Margin="0"></Label>
 						</Button>
 					</StackPanel>
-
 				</Grid>
 			</Border>
 		</Grid>

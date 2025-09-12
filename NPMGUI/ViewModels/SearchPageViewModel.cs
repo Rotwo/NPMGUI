@@ -10,6 +10,7 @@ using NPMGUI.Data;
 using NPMGUI.DTOs;
 using NPMGUI.Helpers;
 using NPMGUI.Interfaces;
+using NPMGUI.Services;
 using NPMGUI.Views;
 
 namespace NPMGUI.ViewModels;
@@ -17,20 +18,20 @@ namespace NPMGUI.ViewModels;
 public partial class SearchPageViewModel : PageViewModel
 {
     private readonly IApiService _apiService;
-    private readonly IProcessService _processService;
+    private readonly ITasksService _tasksService;
+    private readonly IPackageService _packageService;
     
-    public SearchPageViewModel(IApiService apiService, IProcessService processService)
+    public SearchPageViewModel(IApiService apiService, ITasksService tasksService, IPackageService packageService)
     {
         _apiService = apiService;
-        _processService = processService;
+        _tasksService = tasksService;
+        _packageService = packageService;
         
         PageName = ApplicationPagesName.Search;
 
-        processService.ProcessListChanged += (sender, args) =>
-        {
-            Console.WriteLine("ProcessListChanged");
-            Console.WriteLine(processService.GetRunningProcesses().ToArray().ToString());
-        };
+        _tasksService.TaskListChanged += (sender, args) =>
+            CanInstallSelectedPackage = SelectedPackage != null && _tasksService.FindTaskByParams(TaskType.Install, SelectedPackage.Name) == null;
+        _canInstallSelectedPackage = true;
     }
     
     [ObservableProperty]
@@ -40,7 +41,11 @@ public partial class SearchPageViewModel : PageViewModel
     [NotifyPropertyChangedFor(nameof(IsPackageSelected))]
     private Package? _selectedPackage;
     
-    public bool IsPackageSelected =>  SelectedPackage != null;
+    public bool IsPackageSelected => SelectedPackage != null;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(InstallPackageCommand))]
+    private bool _canInstallSelectedPackage;
     
     public ObservableCollection<Result> Results { get; } = new();
     
@@ -73,39 +78,21 @@ public partial class SearchPageViewModel : PageViewModel
     [RelayCommand]
     private void UnselectPackage() => SelectedPackage = null;
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanInstallSelectedPackage))]
     private async void InstallPackage(Package selectedPackage)
     {
-        List<string> errorMessages = [];
-        var action = CoreService.Instance.Core.InstallPackage(selectedPackage.Name, selectedPackage.Version, false, OnOutput, OnError);
-        
-        void OnError(string obj)
-        {
-            errorMessages.Add(obj);
-            Console.WriteLine(obj);
-        }
+        var (success, errors) = await _packageService.InstallPackageAsync(selectedPackage);
 
-        void OnOutput(string obj)
-        {
-            Console.WriteLine(obj);
-        }
-
-        _processService.RegisterProcess(action.Process);
-
-        await action.Process.WaitForExitAsync();
-
-        if (errorMessages.Any())
+        if (!success)
         {
             Dispatcher.UIThread.Post(() =>
             {
                 var errorWindow = new ScriptInstallErrorWindow
                 {
-                    DataContext = new ScriptInstallationErrorViewModel(errorMessages)
+                    DataContext = new ScriptInstallationErrorViewModel(errors)
                 };
                 errorWindow.Show();
             });
         }
-        
-        _processService.UnregisterProcess(action.Process);
     }
 }

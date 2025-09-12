@@ -44,9 +44,11 @@ public partial class App : Application
         collections.AddSingleton<PageFactory>();
         
         collections.AddSingleton<IApiService, ApiService>();
-        collections.AddSingleton<IProcessService, ProcessService>();
+        collections.AddSingleton<ITasksService, TasksService>();
+        collections.AddSingleton<IPackageService, PackageService>();
         
         var services = collections.BuildServiceProvider();
+        Services = services;
         Services = services;
         
         // Line below is needed to remove Avalonia data validation.
